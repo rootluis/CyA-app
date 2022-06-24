@@ -68,6 +68,7 @@ public class DisciplinaAppServiceImpl implements DisciplinaAppService {
 
     @Override
     public void addDisciplina(Disciplina objDisciplina) {
+
         restTemplate.postForEntity(urlRestAddDiscipline, objDisciplina, String.class);
     }
 
