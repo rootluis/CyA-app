@@ -55,6 +55,7 @@ public class DisciplinaAppServiceImpl implements DisciplinaAppService {
 
     @Override
     public Disciplina getDisciplinaById(String idDisciplina) {
+        LOGGER.info(MessageFormatter.format(">>>>>[DisciplinaServicio] {} : {}<<<<<","Valor a recuperar", idDisciplina).getMessage());
         Disciplina disciplina = restTemplate.getForObject(urlRestFindById + "/" + idDisciplina, Disciplina.class);
         LOGGER.info(MessageFormatter.format(">>>>>[DisciplinaServicio] {} : {}<<<<<","Valor recuperado", disciplina).getMessage());
         return disciplina;

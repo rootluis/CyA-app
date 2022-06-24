@@ -18,6 +18,7 @@
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
+            <th>Id</th>
             <th>Disciplina</th>
             <th>Descripción</th>
             <th>Acciones</th>
@@ -25,11 +26,11 @@
         </thead>
         <tbody>
         <tr th:each="disciplinaTmp : ${disciplinas}">
+            <td th:text="${disciplinaTmp.id}"/>
             <td th:text="${disciplinaTmp.codDisciplina}"/>
             <td th:text="${disciplinaTmp.descripcion}"/>
             <td>
-                <a class="btn btn-info btn-sm"
-                   th:href="@{/disciplina/showFormForUpdate(idDisciplina=${disciplinaTmp.id})}">
+                <a class="btn btn-info btn-sm" th:href="@{/disciplina/showFormForUpdate(idDisciplina=${disciplinaTmp.id})}">
                     Update
                 </a>
 
