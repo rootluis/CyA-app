@@ -28,12 +28,16 @@ public class DisciplinaAppServiceImpl implements DisciplinaAppService {
     private String urlrest;
 
     @Autowired
-    @Value("${disciplina.rest.add}")
-    private String urlRestAddDiscipline;
+    @Value("${disciplina.rest.getById}")
+    private String urlRestFindById;
 
     @Autowired
-    @Value("${disciplina.rest.get}")
-    private String urlRestFindById;
+    @Value("${disciplina.rest.getByCod}")
+    private String urlrestfindByCod;
+
+    @Autowired
+    @Value("${disciplina.rest.add}")
+    private String urlRestAddDiscipline;
 
     @Autowired
     @Value("${disciplina.rest.delete}")
@@ -45,15 +49,20 @@ public class DisciplinaAppServiceImpl implements DisciplinaAppService {
                 new ParameterizedTypeReference<List<Disciplina>>() {
                 });
         List<Disciplina> disciplinas = responseEntity.getBody();
-
+        LOGGER.info(MessageFormatter.format(">>>>>[DisciplinaServicio] {} : {}<<<<<","Valor recuperado desde el Front", disciplinas).getMessage());
         return disciplinas;
     }
 
     @Override
-    public Disciplina getDisciplina(Long iddisciplina) {
-        Disciplina disciplina = restTemplate.getForObject(urlRestFindById + "/" + iddisciplina, Disciplina.class);
+    public Disciplina getDisciplinaById(String idDisciplina) {
+        Disciplina disciplina = restTemplate.getForObject(urlRestFindById + "/" + idDisciplina, Disciplina.class);
         LOGGER.info(MessageFormatter.format(">>>>>[DisciplinaServicio] {} : {}<<<<<","Valor recuperado", disciplina).getMessage());
         return disciplina;
+    }
+
+    @Override
+    public Disciplina getDisciplinaByCod(String codDisciplina) {
+        return null;
     }
 
     @Override
@@ -62,7 +71,7 @@ public class DisciplinaAppServiceImpl implements DisciplinaAppService {
     }
 
     @Override
-    public void deleteDisciplina(Long idDisciplina) {
+    public void deleteDisciplina(String idDisciplina) {
         restTemplate.delete(urlRestDeleteById + "/"+ idDisciplina);
     }
 }

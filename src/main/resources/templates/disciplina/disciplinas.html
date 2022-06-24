@@ -25,17 +25,17 @@
         </thead>
         <tbody>
         <tr th:each="disciplinaTmp : ${disciplinas}">
-            <td th:text="${disciplinaTmp.name}"/>
-            <td th:text="${disciplinaTmp.desc}"/>
+            <td th:text="${disciplinaTmp.codDisciplina}"/>
+            <td th:text="${disciplinaTmp.descripcion}"/>
             <td>
                 <a class="btn btn-info btn-sm"
-                   th:href="@{/disciplina/showFormForUpdate(disciplinaId=${disciplinaTmp.id})}"> <!-- th:href="@{/allergy/showFormForUpdate(allergyId=${tmpAllergy.cdAlergia})}"  -- asi va la referencia para indicar cual es el formulario o vista a abrir -->
+                   th:href="@{/disciplina/showFormForUpdate(idDisciplina=${disciplinaTmp.id})}">
                     Update
                 </a>
 
                 <a th:href="@{/disciplina/delete(disciplinaId=${disciplinaTmp.id})}"
                    class="btn btn-danger btn-sm"
-                   onclick="if (!(confirm('Esta seguro de que decea eliminar la Disciplina?'))) return false">
+                   onclick="if (!(confirm('Esta seguro de que decea eliminar la Disciplina?}))) return false">
                     Delete
                 </a>
             </td>

@@ -29,30 +29,27 @@ public class DisciplinaAppController {
 
     @GetMapping("/showFormForAdd")
     public String addDisciplina(Model theModel) {
-        List<Disciplina> disciplinas = disciplinaAppService.getdisciplinas();
-        int[] valIds = new int[disciplinas.size()];
-        int rowIdx = 0;
-        for (Disciplina objDisciplina : disciplinas) {
-            valIds[rowIdx] = Math.toIntExact(objDisciplina.getId());
-            rowIdx++;
-        }
+//        List<Disciplina> disciplinas = disciplinaAppService.getdisciplinas();
+//        int[] valIds = new int[disciplinas.size()];
+//        int rowIdx = 0;
+//        for (Disciplina objDisciplina : disciplinas) {
+//            valIds[rowIdx] = Math.toIntExact(objDisciplina.getId());
+//            rowIdx++;
+//        }
+//
+//        int maxId = valIds[0];
+//        for (int val : valIds) {
+//            if (val > maxId) {
+//                maxId = val;
+//            }
+//        }
+//
+//        Disciplina disciplina = new Disciplina();
+//        disciplina.setId((long) maxId + 1);
+//        theModel.addAttribute("disciplina", disciplina);
+//        return "disciplina/disciplina-form";
 
-        int maxId = valIds[0];
-        for (int val : valIds) {
-            if (val > maxId) {
-                maxId = val;
-            }
-        }
-
-        Disciplina disciplina = new Disciplina();
-        disciplina.setId((long) maxId + 1);
-        theModel.addAttribute("disciplina", disciplina);
-        return "disciplina/disciplina-form";
-    }
-
-    @GetMapping("/showFormForUpdate")
-    public String updateDisciplina(@RequestParam("disciplinaId") Long disciplina, Model theModel) {
-        Disciplina objDisciplina = disciplinaAppService.getDisciplina(disciplina);
+        Disciplina objDisciplina = new Disciplina();
         theModel.addAttribute("disciplina", objDisciplina);
         return "disciplina/disciplina-form";
     }
@@ -64,9 +61,16 @@ public class DisciplinaAppController {
     }
 
     @GetMapping("/delete")
-    public String deleteDisciplina(@RequestParam("disciplinaId") Long idDisciplina){
+    public String deleteDisciplina(@RequestParam("disciplinaId") String idDisciplina) {
         disciplinaAppService.deleteDisciplina(idDisciplina);
         return "redirect:/disciplina/list";
+    }
+
+    @GetMapping("/showFormForUpdate")
+    public String updateDisciplina(@RequestParam("idDisciplina") String disciplinaId, Model theModel) {
+        Disciplina objDisciplina = disciplinaAppService.getDisciplinaById(disciplinaId);
+        theModel.addAttribute("disciplina", objDisciplina);
+        return "disciplina/disciplina-form";
     }
 
 }

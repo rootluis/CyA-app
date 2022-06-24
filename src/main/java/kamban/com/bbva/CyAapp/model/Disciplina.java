@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class Disciplina {
 
-    private Long id;
+    private String id;
 
-    private String name;
+    private String codDisciplina;
 
-    private String desc;
+    private String descripcion;
 }

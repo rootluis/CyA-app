@@ -8,9 +8,11 @@ public interface DisciplinaAppService {
 
     public List<Disciplina> getdisciplinas();
 
-    public Disciplina getDisciplina(Long idDisciplina);
+    public Disciplina getDisciplinaById(String idDisciplina);
+
+    public Disciplina getDisciplinaByCod(String codDisciplina);
 
     public void addDisciplina(Disciplina objDisciplina);
 
-    public void deleteDisciplina(Long idDisciplina);
+    public void deleteDisciplina(String idDisciplina);
 }
