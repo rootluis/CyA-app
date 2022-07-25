@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <div th:replace="layouts/MasterLayout :: header"></div>
+  <div th:replace="area/layout :: headerArea"></div>
+
+  <link rel="stylesheet" media="screen" th:href="@{/css/area/create.css}" />
+
+</head>
+<body>
+<div th:replace="layouts/MasterLayout :: menu"></div>
+
+  <div class="container">
+    <div th:replace="area/layout :: pageTittle" class="row"></div>
+
+
+    <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-header"> 
+            Formulario de Registro
+          </div>
+          <div class="card-body">
+            <form action="#" th:action="@{/area/}" th:object="${area}" method="post">
+              <div class="row" style="margin-bottom:15px;">
+                <label for="code" class="col-sm-3 col-form-label">Codigo:</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="code"   disabled />
+                  <input type="hidden" th:field="*{code}" id="codeBck"/>
+                </div>
+              </div>
+              <div class="row" style="margin-bottom:15px;">
+                <label for="name" class="col-sm-3 col-form-label">Nombre:</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" th:field="*{name}" id="name" />
+                </div>
+              </div>
+              <div class="row" style="margin-bottom:15px;">
+                <label for="description" class="col-sm-3 col-form-label">Descripción:</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" th:field="*{description}" id="description">
+                </div>
+              </div>
+              <div th:if="${responseData != null}" class="row">
+                <div class="col-lg-12">
+                  <div class="alert alert-danger" role="alert">
+                    <p th:text="${responseData.msn}"></p>
+                    <ul>
+                      <li th:each="errorTmp : ${responseData.errors}">
+                        <span th:text="${errorTmp.message}"></span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-lg-6"></div>
+                <div class="col-lg-3">
+                  <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+                <div class="col-lg-3">
+                  <a class="btn btn-danger" th:href="@{/area/}">Cancelar</a>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3"></div>
+    </div>
+
+    <script th:src="@{/js/area/create.js}"></script>
+</body>
+</html>

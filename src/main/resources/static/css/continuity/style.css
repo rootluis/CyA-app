@@ -1,0 +1,50 @@
+/*
+	> Estilos del titulo de la pagina
+*/
+.tittle{
+	text-align:center;
+	
+}
+
+.tittle h3{
+    font-size:25px;
+	font-weight:600;
+	
+	margin-bottom:15px;
+}
+
+
+/*
+***	Estilos de tabla
+*/
+
+.tableContainer{
+	
+}
+
+.tableContainer thead{
+	text-align:center;
+}
+.tableContainer thead th{
+	margin:5px;
+}
+
+.tableContainer tbody{
+	font-size: 15px;
+}
+.tableContainer tbody td{
+	margin:3px;
+}
+
+.tableContainer tbody .btn-option-edit{
+	width: 18px;
+	height: 18px;
+}
+.tableContainer tbody .btn-option-edit:hover{
+	background-color: #ecedee;
+}
+.tableContainer tbody .btn-option-inactive{
+	
+	text-align: center;
+}
+

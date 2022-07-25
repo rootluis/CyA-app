@@ -1,18 +1,15 @@
 package kamban.com.bbva.CyAapp.service;
 
-import kamban.com.bbva.CyAapp.model.Disciplina;
+import kamban.com.bbva.CyAapp.model.AreaModel;
+import kamban.com.bbva.CyAapp.model.MDLDisciplina;
+import kamban.com.bbva.CyAapp.model.ResponseDataModel;
 
 import java.util.List;
 
 public interface DisciplinaAppService {
-
-    public List<Disciplina> getdisciplinas();
-
-    public Disciplina getDisciplinaById(String idDisciplina);
-
-    public Disciplina getDisciplinaByCod(String codDisciplina);
-
-    public void addDisciplina(Disciplina objDisciplina);
-
-    public void deleteDisciplina(String idDisciplina);
+    public ResponseDataModel<MDLDisciplina> create(MDLDisciplina areaData);
+    public ResponseDataModel<MDLDisciplina> alter(MDLDisciplina areaData);
+    public ResponseDataModel<MDLDisciplina> processDelete(String areaId);
+    public ResponseDataModel<List<MDLDisciplina>> getAll();
+    public ResponseDataModel<MDLDisciplina> getById(String id);
 }

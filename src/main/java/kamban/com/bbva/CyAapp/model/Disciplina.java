@@ -7,7 +7,7 @@ public class Disciplina {
 
     private String id;
 
-    private String codDisciplina;
+    private String name;
 
-    private String descripcion;
+    private String description;
 }

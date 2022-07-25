@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="layouts/MasterLayout :: header"></div>
+    <div th:replace="disciplina/layout :: headerDiscipline"></div>
+
+    <link rel="stylesheet" media="screen" th:href="@{/css/disciplina/alter.css}" />
+
+</head>
+<body>
+
+<div th:replace="layouts/MasterLayout :: menu"></div>
+<div class="container">
+    <div th:replace="disciplina/layout :: pageTittle" class="row"></div>
+
+    <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-header"> 
+            Formulario de Edición
+          </div>
+          <div class="card-body">
+             <form action="#" th:action="@{/disciplina/update}" th:object="${modalData}" method="post">
+                 <div th:if="${responseData != null && (responseData.code=='0' || responseData.code=='WEB-1')}">
+                     <div class="row" style="margin-bottom:15px;">
+                         <label for="name" class="col-sm-3 col-form-label">Nombre:</label>
+                         <div class="col-sm-9">
+                             <input type="text" class="form-control" th:field="*{name}" id="name" />
+                         </div>
+                     </div>
+                     <div class="row" style="margin-bottom:15px;">
+                         <label for="description" class="col-sm-3 col-form-label">Descripción:</label>
+                         <div class="col-sm-9">
+                             <input type="text" class="form-control" th:field="*{description}" id="description">
+                         </div>
+                     </div>
+                     <div class="row">
+                         <div class="col-lg-6">
+                             <input type="hidden" th:field="*{id}"/>
+                             <input type="hidden" th:field="*{active}"/>
+
+                         </div>
+                     </div>
+                 </div>
+
+
+                 <div class="row" th:if="${responseData != null && responseData.code!='0'}">
+                     <div class="col-lg-12">
+                         <div class="alert alert-danger" role="alert">
+                             <p th:text="${responseData.msn}"></p>
+                             <ul>
+                                 <li th:each="errorTmp : ${responseData.errors}">
+                                     <span th:text="${errorTmp.message}"></span>
+                                 </li>
+                             </ul>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="row" th:if="${responseData != null && (responseData.code!='0' && responseData.code!='WEB-1')}">
+                     <div class="col-lg-9"></div>
+                     <div class="col-lg-3">
+                         <a class="btn btn-info" href="#" th:href="@{/disciplina/}">Aceptar</a>
+                     </div>
+                 </div>
+                 <div class="row" th:if="${responseData != null && (responseData.code=='0' || responseData.code=='WEB-1')}">
+                     <div class="col-lg-6"></div>
+                     <div class="col-lg-3">
+                         <button type="submit" class="btn btn-primary">Guardar</button>
+                     </div>
+                     <div class="col-lg-3">
+                         <a class="btn btn-warning" href="#" th:href="@{/disciplina/}">Cancelar</a>
+                     </div>
+                 </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3"></div>
+    </div>
+
+  <script src="../../js/disciplina/alter.js"></script> 
+</body>
+</html>

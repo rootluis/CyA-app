@@ -14,8 +14,8 @@
     <hr>
     <p class="h4 mb-4">Agregar Disciplina</p>
     <form action="#" th:action="@{/disciplina/save}" th:object="${disciplina}" method="post">
-        <input type="text" th:field="*{codDisciplina}" class="form-control mb-4 col4" placeholder="Identificador Disciplina"/>
-        <input type="text" th:field="*{descripcion}" class="form-control mb-4 col4" placeholder="Descripcion Disciplina">
+        <input type="text" th:field="*{name}" class="form-control mb-4 col4" placeholder="Nombre Disciplina"/>
+        <input type="text" th:field="*{description}" class="form-control mb-4 col4" placeholder="Descripcion Disciplina">
         <button type="submit" class="btn btn-primary">Guardar</button>
 <!--        <button type="submit" class="btn btn-warning">Cancelar</button>-->
     </form>
