@@ -1,39 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-    <title>Planing</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" media="screen" href="../../Bootstrap/css/bootstrap.min.css"/>
-
-    <script src="../../js/jquery-3.6.0.min.js"></script>    
-    <script src="../../Bootstrap/js/bootstrap.js"></script>
-    <script src="../../Bootstrap/js/bootstrap.bundle.min.js"></script>
-
-	<!-- Estilos propios de la pagina -->
-    <link rel="stylesheet" media="screen" href="../../css/continuity/style.css" />
-
-    
+    <div th:replace="layouts/MasterLayout :: header"></div>
+    <div th:replace="continuity/layout :: headerCont"></div>
 
 </head>
 <body>
-
+<div th:replace="layouts/MasterLayout :: menu"></div>
 <div class="container">
-    <div class="row">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-8 tittle">
-            <h3 style="" >Catalogo de Continuidad
+    <div th:replace="continuity/layout :: pageTittle" class="row"></div>
 
-            </h3>
-			<hr class="separate"/>
-        </div>
-        <div class="col-lg-2"></div>
-        
-    </div>
     <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-3">
-            <a href="create.html" class="btn btn-primary btn-md" style="font-size:12px;">
+            <a th:href="@{/continuidad/create}" class="btn btn-primary btn-md" style="font-size:12px;">
                Agregar Elemento
             </a>
         </div>
@@ -44,7 +24,7 @@
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
             <div class="table-responsive tableContainer">
-                <table class="table table-bordered">
+                <table id="contTab" class="table table-bordered">
                     <thead class="table-light">
                     <tr>
                         <th colspan="2">Nombre</th>
@@ -54,27 +34,52 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                    <div th:if="${responseData != null && responseData.code=='0'}" th:each="response : ${responseData.result}">
+                        <tr th:id="'ContainerContinuity-'+${response.id}"  th:object="${response}">
                             <td class="btn-option-edit">
-                                <a href="alter.html" class="text-decoration-none">
+                                <a href="#" th:href="@{/continuidad/alter/(id=${response.id})}" class="text-decoration-none">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
                                         <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
                                     </svg>
                                 </a>
                             </td>
-                             <td>
-                              On Going
-                            </td>
-    						<td>En ejecución pendiente</td>
-    						<td class="btn-option-inactive">
-                                <a href="#" class="text-decoration-none"> 
+                            <td th:text="*{name}"></td>
+                            <td th:text="*{description}"></td>
+
+
+                            <td th:classappend="(${response.active} ? btn-options-active : btn-options-hide)" class="btn-option-active" th:id="'OptionActive-'+${response.id}" >
+                                <a href="#" class="text-decoration-none btn-activeOption" th:value="${response.id}" >
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-toggle-on" viewBox="0 0 16 16">
                                         <path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"></path>
                                     </svg>   Activo
                                 </a>
                             </td>
+                            <td th:classappend="(${response.active} ? btn-options-hide : btn-options-active)" class="btn-option-inactive" th:id="'OptionInactive-'+${response.id}">
+                                <a href="#" class="text-decoration-none btn-inactiveOption" th:value="${response.id}" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-toggle-off" viewBox="0 0 16 16">
+                                        <path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"></path>
+                                    </svg>   Inactivo
+                                </a>
+                            </td>
                         </tr>
+                    </div>
+                    <div th:if="${responseData != null && responseData.code!='0'}">
+                        <tr>
+                            <td colspan="5" >
+                                <div class="alert alert-info" role="alert">
+                                    <p th:text="${responseData.msn}"></p>
+                                    <ul>
+                                        <li th:each="errorTmp : ${responseData.errors}">
+                                            <span th:text="${errorTmp.message}"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </div>
+
                     </tbody>
                 </table>
             </div>
@@ -83,7 +88,7 @@
         <div class="col-lg-2"></div>
 
     </div>
-   <script src="../../js/continuity/index.js"></script>
+   <script th:src="@{/js/continuity/index.js}"></script>
  
 </div>
 </body>

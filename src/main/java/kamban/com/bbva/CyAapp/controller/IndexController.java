@@ -19,18 +19,6 @@ public class IndexController {
         return "index";
     }
 
-
-
-    @RequestMapping("/disciplina")
-    public String indexDisciplina(Model model){
-        return "disciplina/index";
-    }
-
-    @RequestMapping("/continuidad")
-    public String indexContinuity(Model model){
-        return "continuity/index";
-    }
-
     @RequestMapping("/sprint")
     public String indexSprint(Model model){
         return "sprint/index";
