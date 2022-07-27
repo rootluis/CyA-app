@@ -19,11 +19,6 @@ public class IndexController {
         return "index";
     }
 
-    @RequestMapping("/stages")
-    public String indexStages(Model model){
-        return "etapas/index";
-    }
-
     @RequestMapping("/estatusDependencia")
     public String indexEstDep(Model model){
         return "estDep/index";

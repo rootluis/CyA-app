@@ -1,34 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Planing</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" media="screen" href="../../Bootstrap/css/bootstrap.min.css"/>
-
-    <script src="../../js/jquery-3.6.0.min.js"></script>    
-    <script src="../../Bootstrap/js/bootstrap.js"></script>
-    <script src="../../Bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Estilos propios de la pagina -->
-  <link rel="stylesheet" media="screen" href="../../css/etapas/style.css" />
-  <link rel="stylesheet" media="screen" href="../../css/etapas/alter.css" />
-
+    <div th:replace="layouts/MasterLayout :: header"></div>
+    <div th:replace="etapas/layout :: headerStage"></div>
+    <link rel="stylesheet" media="screen" th:href="@{/css/etapas/alter.css}" />
 </head>
 <body>
- 
-  <div class="container">
-    <div class="row">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-8 tittle">
-            <h3 style="" >Catalogo de Etapas D&D
+<div th:replace="layouts/MasterLayout :: menu"></div>
 
-            </h3>
-      <hr class="separate"/>
-        </div>
-        <div class="col-lg-2"></div>
-        
-    </div>
+<div class="container">
+    <div th:replace="etapas/layout :: pageTittle" class="row"></div>
+
     <div class="row">
       <div class="col-lg-3"></div>
       <div class="col-lg-6">
@@ -37,36 +19,55 @@
             Formulario de Edición
           </div>
           <div class="card-body">
-             <form action="#" th:action="@{/area/update}" th:object="${area}" method="post">
-              <div class="row">
-                <label for="name" class="col-sm-3 col-form-label">Nombre:</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" th:field="*{name}" id="name" required />
-                </div>
-              </div>
-              <div class="row">
-                <label for="description" class="col-sm-3 col-form-label">Descripción:</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" th:field="*{description}" id="description">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-6">
-                  <input type="hidden" th:field="*{id}"/>
-                  <input type="hidden" th:field="*{active}"/>
+             <form action="#" th:action="@{/etapas/update}" th:object="${modalData}" method="post">
+                 <div th:if="${responseData != null && (responseData.code=='0' || responseData.code=='WEB-1')}">
+                     <div class="row">
+                         <label for="name" class="col-sm-3 col-form-label">Nombre:</label>
+                         <div class="col-sm-9">
+                             <input type="text" class="form-control" th:field="*{name}" id="name" />
+                         </div>
+                     </div>
+                     <div class="row">
+                         <label for="description" class="col-sm-3 col-form-label">Descripción:</label>
+                         <div class="col-sm-9">
+                             <input type="text" class="form-control" th:field="*{description}" id="description">
+                         </div>
+                     </div>
+                     <div class="row">
+                         <div class="col-lg-6">
+                             <input type="hidden" th:field="*{id}"/>
+                             <input type="hidden" th:field="*{active}"/>
 
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-6"></div>
-                <div class="col-lg-3">
-                  <button type="submit" class="btn btn-primary">Guardar</button>
-                </div>
-                <div class="col-lg-3">
-                  <a class="btn btn-danger" href="index.html">Cancelar</a>
-                </div>
-              </div>
-
+                         </div>
+                     </div>
+                 </div>
+                 <div class="row" th:if="${responseData != null && responseData.code!='0'}">
+                     <div class="col-lg-12">
+                         <div class="alert alert-danger" role="alert">
+                             <p th:text="${responseData.msn}"></p>
+                             <ul>
+                                 <li th:each="errorTmp : ${responseData.errors}">
+                                     <span th:text="${errorTmp.message}"></span>
+                                 </li>
+                             </ul>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="row" th:if="${responseData != null && (responseData.code!='0' && responseData.code!='WEB-1')}">
+                     <div class="col-lg-9"></div>
+                     <div class="col-lg-3">
+                         <a class="btn btn-info" href="#" th:href="@{/etapas/}">Aceptar</a>
+                     </div>
+                 </div>
+                 <div class="row" th:if="${responseData != null && (responseData.code=='0' || responseData.code=='WEB-1')}">
+                     <div class="col-lg-6"></div>
+                     <div class="col-lg-3">
+                         <button type="submit" class="btn btn-primary">Guardar</button>
+                     </div>
+                     <div class="col-lg-3">
+                         <a class="btn btn-warning" href="#" th:href="@{/etapas/}">Cancelar</a>
+                     </div>
+                 </div>
 
             </form>
 
@@ -75,7 +76,7 @@
       </div>
       <div class="col-lg-3"></div>
     </div>
-
-  <script src="../../js/etapas/alter.js"></script> 
+</div>
+  <script th:src="@{/js/etapas/alter.js}"></script>
 </body>
 </html>
