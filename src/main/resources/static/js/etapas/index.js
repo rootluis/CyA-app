@@ -1,8 +1,6 @@
 var index=(function($,document){
 
-
 	var main=function(){
-		
     		eventsBody();
     	};
 
