@@ -19,11 +19,6 @@ public class IndexController {
         return "index";
     }
 
-    @RequestMapping("/sprint")
-    public String indexSprint(Model model){
-        return "sprint/index";
-    }
-
     @RequestMapping("/stages")
     public String indexStages(Model model){
         return "etapas/index";

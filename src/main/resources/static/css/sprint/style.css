@@ -44,7 +44,24 @@
 	background-color: #ecedee;
 }
 .tableContainer tbody .btn-option-inactive{
-	
+	color: black;
+	text-align: center;
+}
+.tableContainer tbody .btn-option-active{
+	color: blue;
 	text-align: center;
 }
 
+.tableContainer tbody .btn-option-inactive a{
+	color: #ffc107;
+}
+.tableContainer tbody .btn-option-active a{
+	color: #20c997;
+}
+
+.tableContainer tbody .btn-options-hide{
+    display:none;
+}
+.tableContainer tbody .btn-options-active{
+
+}
