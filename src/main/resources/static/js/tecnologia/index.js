@@ -1,5 +1,5 @@
 var index=(function($,document){
-
+    var btnProcessEnable=new BTNProcessEnable();
 
 	var main=function(){
     		eventsBody();
@@ -8,67 +8,13 @@ var index=(function($,document){
     	var eventsBody=function(){
     	    $("#technologyTab").on("click",".btn-activeOption",function(){
     	        var technology=$(this).attr("value");
-    	        console.log("Desabilitando");
-                disableTechnology(technology);
+    	        btnProcessEnable.Disable(technology,"tecnologia");
     		});
     		$("#technologyTab").on("click",".btn-inactiveOption",function(){
             	var technology=$(this).attr("value");
-            	console.log("habilitando");
-                enableTechnology(technology);
+            	btnProcessEnable.Enable(technology,"tecnologia");
             });
     	}
-
-      var disableTechnology=function(technology){
-
-             $.ajax(
-              {
-                url : '/tecnologia/disable',
-                type: "POST",
-                data :  jQuery.param({ id: technology}) ,
-                           success: function (response) {
-
-                             if(response.code == "0"){
-                                $("#OptionInactive-"+technology).removeClass("btn-options-hide");
-                                $("#OptionActive-"+technology).removeClass("btn-options-active");
-
-                                $("#OptionInactive-"+technology).addClass("btn-options-active");
-                                $("#OptionActive-"+technology).addClass("btn-options-hide");
-
-                             }else{
-                                alert("No fue posible desabilitar la tecnologia");
-
-                             }
-
-                           }
-              });
-        }
-
-     var enableTechnology=function(technology){
-             $.ajax(
-              {
-                url : '/tecnologia/disable',
-                type: "POST",
-                data :  jQuery.param({ id: technology}) ,
-                           success: function (response) {
-
-                             if(response.code == "0"){
-                                $("#OptionInactive-"+technology).removeClass("btn-options-active");
-                                $("#OptionActive-"+technology).removeClass("btn-options-hide");
-
-                                $("#OptionInactive-"+technology).addClass("btn-options-hide");
-                                $("#OptionActive-"+technology).addClass("btn-options-active");
-
-                             }else{
-                                alert("No fue posible habilitar la tecnologia");
-
-                             }
-
-                           }
-              });
-        }
-
-	
-
 
 
 	var index=function(){};

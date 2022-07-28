@@ -1,6 +1,5 @@
 var create=(function($,document){
 
-
 	var main=function(){
 		console.log("Estas en create.js");
 		viewEvents();
@@ -21,9 +20,6 @@ var create=(function($,document){
 		});
 	}
 
-
-
-
 	var create=function(){};
 	create.prototype={
 		main:main
@@ -34,19 +30,3 @@ var create=(function($,document){
 
 var createDoc=new create();
 $(createDoc.main());
-
-//$.ajax(
-//{
-//  url : ‘getDataUser.php’,
-//  type: "POST",
-//  data : {idP: ‘10’}
-//})
-//  .done(function(data) {
-//    $("#respuesta").html(data);
-//  })
-//  .fail(function(data) {
-//    alert( "error" );
-//  })
-//  .always(function(data) {
-//    alert( "complete" );
-//  });

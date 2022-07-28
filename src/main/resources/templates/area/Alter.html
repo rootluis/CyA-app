@@ -24,9 +24,9 @@
              <form action="#" th:action="@{/area/update}" th:object="${modalData}" method="post">
               <div th:if="${responseData != null && (responseData.code=='0' || responseData.code=='WEB-1')}">
                   <div class="row" style="margin-bottom:15px;">
-                      <label for="code" class="col-sm-3 col-form-label">Codigo:</label>
+                      <label for="codes" class="col-sm-3 col-form-label">Codigo:</label>
                       <div class="col-sm-9">
-                          <input type="text" class="form-control" th:field="*{code}"  disabled />
+                          <input type="text" class="form-control" th:field="*{code}" id="codes" />
                       </div>
                   </div>
                   <div class="row" style="margin-bottom:15px;">
@@ -89,7 +89,7 @@
       </div>
       <div class="col-lg-3"></div>
     </div>
-
-  <script src="../../js/area/alter.js"></script> 
+  </div>
+  <script th:src="@{/js/area/alter.js}"></script>
 </body>
 </html>
